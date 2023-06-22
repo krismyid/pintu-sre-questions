@@ -28,14 +28,14 @@ func weatherHandler(w http.ResponseWriter, r *http.Request) {
 	// make a GET request to the API
 	resp, err := http.Get(url)
 	if err != nil {
-		http.Error(w, "Failed to fetch weather data", http.StatusInternalServerError)
+		http.Error(w, "Failed to fetch weather data: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 	defer resp.Body.Close()
 	// decode the JSON response
 	err = json.NewDecoder(resp.Body).Decode(&weatherData.data)
 	if err != nil {
-		http.Error(w, "Failed to parse weather data", http.StatusInternalServerError)
+		http.Error(w, "Failed to parse weather data: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 	// cache the data for 15 minutes
