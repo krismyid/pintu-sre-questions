@@ -39,7 +39,9 @@ const weatherHandler = (req, res) => {
 
 const statusHandler = (req, res) => {
     const data = {
-        Status: "OK"
+        Status: "OK",
+        Time: new Date(),
+        Engine: "NodeJS Server",
     };
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(data));

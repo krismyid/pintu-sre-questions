@@ -48,6 +48,8 @@ func weatherHandler(w http.ResponseWriter, r *http.Request) {
 func statusHandler(w http.ResponseWriter, r *http.Request) {
 	data := map[string]string{
 		"Status": "OK",
+		"Time":   time.Now().Format(time.RFC3339),
+		"Engine": "go",
 	}
 
 	err := json.NewEncoder(w).Encode(data)
