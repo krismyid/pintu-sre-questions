@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "pintu-sre-helm.name" -}}
+{{- define "helm-nodejs.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "pintu-sre-helm.fullname" -}}
+{{- define "helm-nodejs.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "pintu-sre-helm.chart" -}}
+{{- define "helm-nodejs.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "pintu-sre-helm.labels" -}}
-helm.sh/chart: {{ include "pintu-sre-helm.chart" . }}
-{{ include "pintu-sre-helm.selectorLabels" . }}
+{{- define "helm-nodejs.labels" -}}
+helm.sh/chart: {{ include "helm-nodejs.chart" . }}
+{{ include "helm-nodejs.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "pintu-sre-helm.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "pintu-sre-helm.name" . }}
+{{- define "helm-nodejs.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "helm-nodejs.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "pintu-sre-helm.serviceAccountName" -}}
+{{- define "helm-nodejs.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "pintu-sre-helm.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "helm-nodejs.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
