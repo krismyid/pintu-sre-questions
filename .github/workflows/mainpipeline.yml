@@ -6,6 +6,33 @@ on:
       - master
 
 jobs:
+  golang-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.20.5
+
+      - name: Run tests
+        run: go test ./...
+        working-directory: golang
+  nodejs-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: cd nodejs && npm ci
+    - run: cd nodejs && npm test
   build-and-push:
     runs-on: ubuntu-latest
     steps:
