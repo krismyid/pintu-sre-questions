@@ -1,7 +1,7 @@
 name: Deploy to Kubernetes
 
-on: workflow_dispatch
-
-jobs:
-  deploy:
-    
+on:
+  workflow_run:
+    workflows: [Release Charts]
+    types:
+      - completed
