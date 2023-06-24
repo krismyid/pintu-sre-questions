@@ -1,10 +1,6 @@
 name: Release Helm Charts
 
 on:
-  workflow_run:
-    workflows: [Test and Build Docker Images]
-    types:
-      - completed
   workflow_call:
     inputs:
       charts_dir: helm-golang
