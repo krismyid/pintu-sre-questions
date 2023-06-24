@@ -34,6 +34,7 @@ jobs:
     - run: cd nodejs && npm ci
     - run: cd nodejs && npm test
   build-and-push:
+    needs: [golang-test, nodejs-test]
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
