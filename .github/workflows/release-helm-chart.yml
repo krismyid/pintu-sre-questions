@@ -5,6 +5,9 @@ on:
     workflows: [Test and Build Docker Images]
     types:
       - completed
+  workflow_call:
+    inputs:
+      charts_dir: helm-golang
 
 jobs:
   release:
@@ -22,7 +25,5 @@ jobs:
 
       - name: Run chart-releaser for Golang
         uses: helm/chart-releaser-action@v1.5.0
-        inputs:
-          charts_dir: helm-golang
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
