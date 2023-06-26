@@ -24,6 +24,6 @@ jobs:
       - name: Run chart-releaser for Golang
         uses: helm/chart-releaser-action@v1.5.0
         with:
-          charts_dir: helm-golang
+          charts_dir: helm-golan
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
