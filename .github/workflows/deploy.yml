@@ -8,5 +8,31 @@ on:
 
 jobs:
   deploy:
-    #do nothing
     runs-on: ubuntu-latest
+    steps:
+      - name: Connect Tailscale
+        uses: tailscale/github-action@v1
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+      # get kubectl
+      - name: Get Kubectl
+        uses: azure/setup-kubectl@v1
+      # set kubectl context
+      - name: Set Kubectl Context
+        uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+      # helm upgrade -i  
+      - name: Deploy Golang Backend to Kubernetes
+        uses: azure/k8s-deploy@v1
+        with:
+          method: helm
+          chart: ./helm-golang
+          release: pintu-golang
+      - name: Deploy Nodejs Backend to Kubernetes
+        uses: azure/k8s-deploy@v1
+        with:
+          method: helm
+          chart: ./helm-golang
+          release: pintu-golang
