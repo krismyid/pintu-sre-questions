@@ -16,7 +16,7 @@ returns json:
 }`
 ```
 - **GET /weather**
-get weather data for Jakarta, from openweathermap, returns json: 
+get weather data for Jakarta, from openweathermap, cache the result for 15 minutes, then returns json: 
 ```
 {
   "coord": {
