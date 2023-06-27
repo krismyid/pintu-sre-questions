@@ -64,4 +64,4 @@ get weather data for Jakarta, from openweathermap, returns json:
 - Unit testing for golang and nodejs
 - Docker image build and push to docker hub
 - Helm template release
-- Deploy to microk8s
+- Deploy to self hosted microk8s via tailscale network
