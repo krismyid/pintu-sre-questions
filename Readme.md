@@ -2,6 +2,9 @@
 
 For the test, I'm creating a middleware using both golang and nodejs.
 
+### Diagram
+![Topology](diagram.jpg)
+
 ### API Docs
 - **GET /status**
 returns json: 
@@ -63,5 +66,9 @@ get weather data for Jakarta, from openweathermap, returns json:
 ### CI/CD Features
 - Unit testing for golang and nodejs
 - Docker image build and push to docker hub
-- Helm template release
-- Deploy to self hosted microk8s via tailscale network
+- Deploy with helm to self hosted microk8s cluster via tailscale network
+
+### Endpoint
+- Golang Backend: https://pintu-golang.kris.my.id
+- Node JS Backend: https://pintu-nodejs.kris.my.id
+
