@@ -69,6 +69,9 @@ get weather data for Jakarta, from openweathermap, returns json:
 - Deploy with helm to self hosted microk8s cluster via tailscale network
 
 ### Endpoint
-- Golang Backend: https://pintu-golang.kris.my.id
-- Node JS Backend: https://pintu-nodejs.kris.my.id
-
+#### Golang Backend: 
+- https://pintu-golang.kris.my.id/status
+- https://pintu-golang.kris.my.id/weather
+#### NodeJS Backend
+- https://pintu-nodejs.kris.my.id/status
+- https://pintu-nodejs.kris.my.id/weather
