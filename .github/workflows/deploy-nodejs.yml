@@ -1,4 +1,4 @@
-name: Deploy Golang App to Kubernetes
+name: Deploy Node JS App to Kubernetes
 
 on:
   workflow_run:
