@@ -1,0 +1,39 @@
+name: Deploy Golang App to Kubernetes
+
+on:
+  workflow_run:
+    workflows: [Test and Build Docker Images]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Connect Tailscale
+        uses: tailscale/github-action@v1
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+      # get kubectl
+      - name: Get Kubectl
+        uses: azure/setup-kubectl@v1
+      # set kubectl context
+      - name: Set Kubectl Context
+        uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+      # helm upgrade -i  
+      - uses: azure/k8s-bake@v2
+        with:
+          renderEngine: 'helm'
+          helmChart: './helm-golang/'
+        id: bake
+
+      - uses: Azure/k8s-deploy@v1.2
+        with:
+          action: deploy
+          namespace: pintu-prd
+          manifests: ${{ steps.bake.outputs.manifestsBundle }}

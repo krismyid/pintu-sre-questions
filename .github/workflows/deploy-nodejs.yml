@@ -29,10 +29,11 @@ jobs:
       - uses: azure/k8s-bake@v2
         with:
           renderEngine: 'helm'
-          helmChart: './helm-golang/'
+          helmChart: './helm-nodejs/'
         id: bake
 
       - uses: Azure/k8s-deploy@v1.2
         with:
           action: deploy
+          namespace: 'pintu-prd'
           manifests: ${{ steps.bake.outputs.manifestsBundle }}
