@@ -1,4 +1,4 @@
-name: Deploy to Kubernetes
+name: Deploy Golang App to Kubernetes
 
 on:
   workflow_run:
@@ -24,15 +24,13 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
       # helm upgrade -i  
-      - name: Deploy Golang Backend to Kubernetes
-        uses: azure/k8s-deploy@v1
+      - uses: azure/k8s-bake@v2
         with:
-          method: helm
-          chart: ./helm-golang
-          release: pintu-golang
-      - name: Deploy Nodejs Backend to Kubernetes
-        uses: azure/k8s-deploy@v1
+          renderEngine: 'helm'
+          helmChart: './helm-golang/'
+        id: bake
+
+      - uses: Azure/k8s-deploy@v1.2
         with:
-          method: helm
-          chart: ./helm-golang
-          release: pintu-golang
+          action: deploy
+          manifests: ${{ steps.bake.outputs.manifestsBundle }}
